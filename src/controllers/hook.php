@@ -120,11 +120,14 @@ class hook
 		}
 
 		$constraint = new Constraints\Collection([
-			'ref' => new Constraints\Regex('/^refs\/head\/.+$/'),
-			'after' => new Constraints\Regex('/^[0-9a-f]+$/'),
-			'repository' => new Constraints\Collection([
-				'url' => new Constraints\Regex('/^https?:\/\/.+$/')
-			])
+			'allowExtraFields' => true,
+			'fields' => [
+				'ref' => new Constraints\Regex('#^refs/heads/#'),
+				'after' => new Constraints\Regex('/^[0-9a-f]+$/'),
+				'repository' => new Constraints\Collection([
+					'url' => new Constraints\Regex('/^https?:\/\/.+$/')
+				])
+			]
 		]);
 
 		$errors = $this->validator->validate($event, $constraint);

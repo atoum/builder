@@ -44,8 +44,7 @@ class build
 		$git = new ProcessBuilder(['git']);
 		$php = new ProcessBuilder(['php']);
 
-		$ref = explode('/', $this->args['push']['ref']);
-		$branch = array_pop($ref);
+		$branch = preg_replace('#^refs/heads/#', '', $this->args['push']['ref']);
 
 		$sandbox = $this->sandbox->create($fs);
 		$repository = $sandbox
