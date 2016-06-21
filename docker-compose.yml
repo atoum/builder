@@ -1,0 +1,37 @@
+builder:
+    build: .
+    environment:
+        ATOUM_BUILDER_REDIS_HOST: redis
+        ATOUM_BUILDER_REDIS_PORT: 6379
+        ATOUM_BUILDER_RESQUE_QUEUE: atoum
+        ATOUM_BUILDER_AUTH_TOKEN: 7ccd06f0-0fb8-11e6-829d-bfb8d154eebc
+    links:
+        - redis:redis
+        - worker:worker
+    volumes:
+        - .:/var/www
+        - ./data/worker:/var/www/html/phar
+    ports:
+        - 8087:80
+
+worker:
+    build: .
+    environment:
+        ATOUM_BUILDER_REDIS_HOST: redis
+        ATOUM_BUILDER_REDIS_PORT: 6379
+        ATOUM_BUILDER_RESQUE_QUEUE: atoum
+        ATOUM_BUILDER_PHAR_DIRECTORY: /data
+    links:
+        - redis:redis
+    volumes:
+        - .:/app
+        - ./data/worker:/data
+    entrypoint: php
+    command: /app/bin/worker.php
+
+redis:
+    image: redis:3-alpine
+    volumes:
+        - ./data/redis/lib:/data
+    ports:
+        - 8089:6379
