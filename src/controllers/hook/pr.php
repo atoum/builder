@@ -36,11 +36,16 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  *
  * @SWG\Model(
  *     id="PullRequestEvent",
- *     required="number, pull_request",
+ *     required="number, action, pull_request",
  *     @SWG\Property(
  *         name="number",
  *         type="integer",
  *         description="Pull request number"
+ *     ),
+ *     @SWG\Property(
+ *         name="action",
+ *         type="string",
+ *         description="Pull request action"
  *     ),
  *     @SWG\Property(
  *         name="pull_request",
@@ -147,6 +152,7 @@ class pr
 		$constraint = new Constraints\Collection([
 			'allowExtraFields' => true,
 			'fields' => [
+				'action' => new Constraints\Regex('/^(opened|edited|reopened|synchronize)$/'),
 				'number' => new Constraints\Required($integer),
 				'pull_request' => new Constraints\Collection([
 					'allowExtraFields' => true,
