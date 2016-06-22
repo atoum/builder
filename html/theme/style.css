@@ -130,6 +130,32 @@ tr.parent a[href^="/"] {
 	text-align:center;
 	font-size:.75em;
 }
+
+/*------------------------------------*\
+    Buttons
+\*------------------------------------*/
+.btn {
+	color: #4078c0;
+	background-color: transparent;
+	border: 1px solid #bac6d3;
+	position: relative;
+	display: inline-block;
+	padding: 6px 12px;
+	font-size: 13px;
+	font-weight: bold;
+	line-height: 20px;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border-radius: 3px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
 /*------------------------------------*\
     Alert
 \*------------------------------------*/
@@ -142,27 +168,59 @@ tr.parent a[href^="/"] {
 	background-color: #e2eef9;
 	border: 1px solid #bac6d3;
 	border-radius: 3px;
+	margin-bottom: 1em;
 }
 
-.alert > .alert-body {
-	display: none;
+.alert a {
+	color: #246;
 }
 
-.alert:target > .alert-body {
+.alert > .alert-dismiss, .alert .alert-show {
+	display: block;
+	position: absolute;
+	right: 1em;
+	top: 1em;
+}
+
+.alert .alert-show {
 	display: block;
 }
 
-.alert:target > small {
+.alert .alert-body {
 	display: none;
 }
 
+.alert:target .alert-body {
+	display: block;
+}
+
+.alert:target .alert-dismiss {
+	display: block;
+}
+
+.alert:target .alert-show {
+	display: none;
+}
+
+.alert .alert-dismiss {
+	display: none;
+}
+
+.alert:target .alert-body {
+	display: block;
+}
+
 .alert-heading {
+	margin-bottom: .65em;
 	font-size: 1.3em;
+}
+
+.alert:target .alert-heading {
 	margin-bottom: .65em;
 }
 
 .alert p {
-	margin-bottom: .65em;
+	margin-bottom: 0em;
 }
 
 .alert code {
@@ -174,4 +232,22 @@ tr.parent a[href^="/"] {
 	padding: 1em;
 	background-color: #B7D5F1;
 	margin-bottom: .65em;
+}
+
+input[type=text] {
+	min-height: 34px;
+	color: #333;
+	vertical-align: middle;
+	background-color: #fff;
+	background-repeat: no-repeat;
+	background-position: right 8px center;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	outline: none;
+	box-shadow: inset 0 1px 2px rgba(0,0,0,0.075);
+	margin-bottom: 1em;
+	padding: 6px 10px;
+	font-size: 16px;
+	display: block;
+	width: 100%;
 }

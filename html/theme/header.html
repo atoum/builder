@@ -4,7 +4,8 @@
 
     <div class="alert" id="check-signature">
         <h1 class="alert-heading">Checking <abbr title="PHP Archive">PHAR</abbr>s signature</h1>
-        <small><a href="#check-signature">Read more</a></small>
+        <small class="btn alert-dismiss"><a href="#">Dismiss</a></small>
+        <small class="btn alert-show"><a href="#check-signature">Show</a></small>
 
         <div class="alert-body">
             <p>Each <abbr title="PHP Archive">PHAR</abbr>  distributed under the atoum organization comes with its own signature. A <abbr title="Pretty Good Privacy">PGP</abbr> signature is available for verification.</p>
@@ -25,7 +26,7 @@ gpg:               imported: 1  (RSA: 1)</pre>
             <pre>$ <strong>gpg atoum-dev-master-033f5eea0.phar.asc</strong>
 gpg: assuming signed data in `html/phar/atoum-pr604-edition_configuration-0ee9f3229.phar'
 gpg: Signature made Wed Jun 22 12:54:47 2016 UTC using RSA key ID 60AF5C01
-gpg: <strong>Good signature from "atoum org <team@atoum.org>"</strong>
+gpg: <strong>Good signature from "atoum org &lt;team@atoum.org&gt;"</strong>
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: <strong>6CEE 3798 FB8E EB57 98D5  2A81 503D EFD1 60AF 5C01</strong></pre>
@@ -36,3 +37,32 @@ Primary key fingerprint: <strong>6CEE 3798 FB8E EB57 98D5  2A81 503D EFD1 60AF 5
             </p>
         </div>
     </div>
+
+    <input type="text" placeholder="Search">
+
+    <script>
+        var debounce;
+
+        document.querySelector('input').onkeyup = function() {
+            if (debounce) {
+                clearTimeout(debounce);
+            }
+
+            debounce = setTimeout(
+                function() {
+                    var value = document.querySelector('input').value;
+
+                    document.querySelectorAll('tr:not(.indexhead)').forEach(function(tr) {
+                        console.log(tr.textContent.indexOf(value));
+                        if (tr.textContent.indexOf(value) > -1) {
+                            tr.style.display = '';
+                        }  else {
+                            tr.style.display = 'none';
+                        }
+                        console.log(tr.style);
+                    });
+                },
+                50
+            );
+        };
+    </script>
