@@ -8,6 +8,7 @@ $app = new application();
 
 $app['auth_token'] = getenv('ATOUM_BUILDER_AUTH_TOKEN');
 
+$app['gpg.url'] = getenv('ATOUM_BUILDER_GPG_URL') ?: null;
 $app['phar.directory'] = getenv('ATOUM_BUILDER_PHAR_DIRECTORY') ?: null;
 
 $app['monolog.name'] = 'atoum-builder';

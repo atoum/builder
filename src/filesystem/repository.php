@@ -95,7 +95,7 @@ class repository
 
         $process
             ->setWorkingDirectory($this->directory)
-            ->mustRun(function ($_, $buffer) { echo $buffer; })
+            ->mustRun()
         ;
 
         return $repository;

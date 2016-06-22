@@ -43,6 +43,7 @@ class build
 		$fs = new Filesystem();
 		$git = new ProcessBuilder(['git']);
 		$php = new ProcessBuilder(['php']);
+		$gpg = new ProcessBuilder(['gpg']);
 
 		$arguments = $this->getArguments();
 		$branch = preg_replace('#^refs/heads/#', '', $arguments['ref']);
@@ -55,15 +56,17 @@ class build
 		;
 		$phar = $sandbox
 			->build($repository, $php)
-			->test($php, function ($_, $buffer) { echo $buffer; })
+			->test($php)
 		;
 
 		if ($this->directory !== null)
 		{
-			$repository->deploy($phar, $this->directory, $fs);
+			$repository
+				->deploy($phar, $this->directory, $fs)
+				->sign($gpg)
+			;
 		}
 	}
-
 
 	private function getArguments()
 	{

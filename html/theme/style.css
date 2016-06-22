@@ -130,3 +130,48 @@ tr.parent a[href^="/"] {
 	text-align:center;
 	font-size:.75em;
 }
+/*------------------------------------*\
+    Alert
+\*------------------------------------*/
+.alert {
+	position: relative;
+	padding: 15px;
+	font-size: 14px;
+	line-height: 1.5;
+	color: #246;
+	background-color: #e2eef9;
+	border: 1px solid #bac6d3;
+	border-radius: 3px;
+}
+
+.alert > .alert-body {
+	display: none;
+}
+
+.alert:target > .alert-body {
+	display: block;
+}
+
+.alert:target > small {
+	display: none;
+}
+
+.alert-heading {
+	font-size: 1.3em;
+	margin-bottom: .65em;
+}
+
+.alert p {
+	margin-bottom: .65em;
+}
+
+.alert code {
+	padding: 2px;
+	background-color: #B7D5F1;
+}
+
+.alert pre {
+	padding: 1em;
+	background-color: #B7D5F1;
+	margin-bottom: .65em;
+}

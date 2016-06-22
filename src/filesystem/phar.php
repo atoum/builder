@@ -38,6 +38,21 @@ class phar
 
         $fs->copy($this->path, $destination, true);
 
-        return new static($destination);
+        return new self($destination);
+    }
+
+    public function sign(ProcessBuilder $gpg)
+    {
+        $gpg = clone $gpg;
+
+        $gpg
+            ->add('--armor')
+            ->add('--detach-sign')
+            ->add($this->path)
+            ->getProcess()
+                ->mustRun(function($_, $buffer) { echo $buffer; })
+        ;
+
+        return $this;
     }
 }
