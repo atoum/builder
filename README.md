@@ -59,7 +59,8 @@ docker run --rm --name=atoum-builder-worker -d --entrypoint=php atoum/builder /a
 
 The API exposes 2 useful routes:
 
-* `POST /hook/{token}` is used by [Github's push webhook](https://developer.github.com/v3/activity/events/types/#pushevent)
+* `POST /hook/push/{token}` is used by [Github's push webhook](https://developer.github.com/v3/activity/events/types/#pushevent)
+* `POST /hook/pr/{token}` is used by [Github's pull request webhook](https://developer.github.com/v3/activity/events/types/#pullrequestevent)
 
 There are also two routes to access the API documentation:
 
