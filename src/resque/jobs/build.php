@@ -44,13 +44,14 @@ class build
 		$git = new ProcessBuilder(['git']);
 		$php = new ProcessBuilder(['php']);
 
-		$branch = preg_replace('#^refs/heads/#', '', $this->args['push']['ref']);
+		$arguments = $this->getArguments();
+		$branch = preg_replace('#^refs/heads/#', '', $arguments['ref']);
 
 		$sandbox = $this->sandbox->create($fs);
 		$repository = $sandbox
-			->klone($git, $this->args['push']['repository']['url'])
+			->klone($git, $arguments['url'])
 			->checkout($git, $branch)
-			->tag($git, $php)
+			->tag($git, $php, $arguments['prefix'])
 		;
 		$phar = $sandbox
 			->build($repository, $php)
@@ -61,5 +62,15 @@ class build
 		{
 			$repository->deploy($phar, $this->directory, $fs);
 		}
+	}
+
+
+	private function getArguments()
+	{
+		return [
+			'ref' => preg_replace('#^refs/heads/#', '', isset($this->args['push']) ? $this->args['push']['ref'] : $this->args['pr']['pull_request']['head']['repo']['ref']),
+			'url' => isset($this->args['push']) ? $this->args['push']['repository']['url'] : $this->args['pr']['pull_request']['head']['repo']['url'],
+			'prefix' => isset($this->args['push']) ? 'dev' : ('pr' . $this->args['pr']['number'])
+		];
 	}
 }

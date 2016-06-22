@@ -1,6 +1,6 @@
 <?php
 
-namespace atoum\builder\controllers;
+namespace atoum\builder\controllers\hook;
 
 use atoum\builder\exceptions;
 use atoum\builder\resque\broker;
@@ -16,19 +16,23 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @SWG\Model(
- *     id="Release",
- *     required="tag_name, created_at",
- *     @SWG\Property(name="tag_name", type="string", description="Version number (x.y.z)"),
- *     @SWG\Property(name="created_at", type="string", description="Release date (ISO 8601)")
+ *     id="Repository",
+ *     required="url",
+ *     @SWG\Property(name="url", type="string", description="Repository HTTP URL")
  * )
  *
  * @SWG\Model(
- *     id="Event",
- *     required="release",
+ *     id="PushEvent",
+ *     required="ref, repository",
  *     @SWG\Property(
- *         name="release",
- *         type="Release",
- *         description="Release informations"
+ *         name="ref",
+ *         type="string",
+ *         description="Git reference"
+ *     ),
+ *     @SWG\Property(
+ *         name="repository",
+ *         type="Repository",
+ *         description="Repository informations"
  *     )
  * )
  */
@@ -36,7 +40,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 /**
  * @SWG\Resource(basePath="/")
  */
-class hook
+class push
 {
 	/**
 	 * @var string
@@ -68,7 +72,7 @@ class hook
 
 	/**
 	 * @SWG\Api(
-	 *     path="/hook/{token}",
+	 *     path="/hook/push/{token}",
 	 *     @SWG\Operation(
 	 *         method="POST",
 	 *         @SWG\Consumes("application/json"),
@@ -82,7 +86,7 @@ class hook
 	 *         ),
 	 *         @SWG\Parameter(
 	 *             paramType="body",
-	 *             type="Event",
+	 *             type="PushEvent",
 	 *             name="body",
 	 *             required=true,
 	 *             description="Event payload"
@@ -123,7 +127,6 @@ class hook
 			'allowExtraFields' => true,
 			'fields' => [
 				'ref' => new Constraints\Regex('#^refs/heads/#'),
-				'after' => new Constraints\Regex('/^[0-9a-f]+$/'),
 				'repository' => new Constraints\Collection([
 					'allowExtraFields' => true,
 					'fields' => [

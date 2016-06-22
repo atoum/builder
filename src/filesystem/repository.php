@@ -52,7 +52,7 @@ class repository
         return $repository;
     }
 
-    public function tag(ProcessBuilder $git, ProcessBuilder $php)
+    public function tag(ProcessBuilder $git, ProcessBuilder $php, $prefix = null)
     {
         if (is_dir($this->directory) === false)
         {
@@ -81,7 +81,8 @@ class repository
         $repository = clone $this;
 
         $sha1 = trim($process->getOutput());
-        $repository->version = 'dev-' . $this->branch .'-' . substr($sha1, 0, 9);
+        $prefix = null !== $prefix ? $prefix . '-' : $prefix;
+        $repository->version = $prefix . $this->branch .'-' . substr($sha1, 0, 9);
 
         $process = $php
             ->add('scripts' . DIRECTORY_SEPARATOR . 'tagger.php')

@@ -13,6 +13,7 @@ use Silex;
 use Silex\Provider\ValidatorServiceProvider;
 use SwaggerUI\Silex\Provider\SwaggerUIServiceProvider;
 use Swagger\Annotations as SWG;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -59,7 +60,9 @@ class application extends Silex\Application
 
 	public function run(Request $request = null)
 	{
-		$this->post('/hook/{token}', new hook($this['auth_token'], $this['broker'], $this['validator'], $this['logger']));
+		$this->get('/', function() { return new RedirectResponse('/phar'); });
+		$this->post('/hook/push/{token}', new hook\push($this['auth_token'], $this['broker'], $this['validator'], $this['logger']));
+		$this->post('/hook/pr/{token}', new hook\pr($this['auth_token'], $this['broker'], $this['validator'], $this['logger']));
 		$this->error(new error());
 
 		parent::run($request);
