@@ -17,8 +17,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 /**
  * @SWG\Model(
  *     id="Repo",
- *     required="url",
- *     @SWG\Property(name="url", type="string", description="Repository HTTP URL")
+ *     required="clone_url",
+ *     @SWG\Property(name="clone_url", type="string", description="Repository HTTP URL")
  * )
  *
  * @SWG\Model(
@@ -164,7 +164,7 @@ class pr
 								'repo' => new Constraints\Collection([
 									'allowExtraFields' => true,
 									'fields' => [
-										'url' => new Constraints\Regex('/^https?:\/\/.+$/')
+										'clone_url' => new Constraints\Regex('/^https?:\/\/.+$/')
 									]
 								])
 							]
