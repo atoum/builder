@@ -14,21 +14,21 @@
             <p>Use whatever tool you like to download the <abbr title="PHP Archive">PHAR</abbr> and its signature, then use <code>gpg</code> command line to verify it:</p>
 
             <pre>$ <strong>gpg --keyserver pgp.mit.edu --recv-keys 0x503DEFD160AF5C01</strong>
-    gpg: requesting key 60AF5C01 from hkp server pgp.mit.edu
-    gpg: /root/.gnupg/trustdb.gpg: trustdb created
-    gpg: key 60AF5C01: public key "atoum org <team@atoum.org>" imported
-    gpg: Total number processed: 1
-    gpg:               imported: 1  (RSA: 1)</pre>
+gpg: requesting key 60AF5C01 from hkp server pgp.mit.edu
+gpg: /root/.gnupg/trustdb.gpg: trustdb created
+gpg: key 60AF5C01: public key "atoum org <team@atoum.org>" imported
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)</pre>
 
             <p>The key is now available on your machine: you should be able to verify the phar:</p>
 
             <pre>$ <strong>gpg atoum-dev-master-033f5eea0.phar.asc</strong>
-    gpg: assuming signed data in `html/phar/atoum-pr604-edition_configuration-0ee9f3229.phar'
-    gpg: Signature made Wed Jun 22 12:54:47 2016 UTC using RSA key ID 60AF5C01
-    gpg: <strong>Good signature from "atoum org <team@atoum.org>"</strong>
-    gpg: WARNING: This key is not certified with a trusted signature!
-    gpg:          There is no indication that the signature belongs to the owner.
-    Primary key fingerprint: <strong>6CEE 3798 FB8E EB57 98D5  2A81 503D EFD1 60AF 5C01</strong></pre>
+gpg: assuming signed data in `html/phar/atoum-pr604-edition_configuration-0ee9f3229.phar'
+gpg: Signature made Wed Jun 22 12:54:47 2016 UTC using RSA key ID 60AF5C01
+gpg: <strong>Good signature from "atoum org <team@atoum.org>"</strong>
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: <strong>6CEE 3798 FB8E EB57 98D5  2A81 503D EFD1 60AF 5C01</strong></pre>
 
             <p>
                 At this point you have successfully verified that the signature is good. <strong>But you should also see a warning:</strong> this is expected.
