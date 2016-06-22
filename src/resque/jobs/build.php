@@ -68,7 +68,7 @@ class build
 	private function getArguments()
 	{
 		return [
-			'ref' => preg_replace('#^refs/heads/#', '', isset($this->args['push']) ? $this->args['push']['ref'] : $this->args['pr']['pull_request']['head']['repo']['ref']),
+			'ref' => preg_replace('#^refs/heads/#', '', isset($this->args['push']) ? $this->args['push']['ref'] : $this->args['pr']['pull_request']['head']['ref']),
 			'url' => isset($this->args['push']) ? $this->args['push']['repository']['url'] : $this->args['pr']['pull_request']['head']['repo']['url'],
 			'prefix' => isset($this->args['push']) ? 'dev' : ('pr' . $this->args['pr']['number'])
 		];

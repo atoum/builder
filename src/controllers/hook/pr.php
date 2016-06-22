@@ -17,14 +17,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 /**
  * @SWG\Model(
  *     id="Repo",
- *     required="url, ref",
- *     @SWG\Property(name="url", type="string", description="Repository HTTP URL"),
- *     @SWG\Property(name="ref", type="string", description="Git reference")
+ *     required="url",
+ *     @SWG\Property(name="url", type="string", description="Repository HTTP URL")
  * )
  *
  * @SWG\Model(
  *     id="Head",
- *     required="repo",
+ *     required="ref, repo",
+ *     @SWG\Property(name="ref", type="string", description="Git reference")
  *     @SWG\Property(name="repo", type="Repo", description="Pull request repository")
  * )
  *
@@ -160,10 +160,10 @@ class pr
 						'head' => new Constraints\Collection([
 							'allowExtraFields' => true,
 							'fields' => [
+								'ref' => new Constraints\Regex('#^(?:refs/heads/)?#'),
 								'repo' => new Constraints\Collection([
 									'allowExtraFields' => true,
 									'fields' => [
-										'ref' => new Constraints\Regex('#^(?:refs/heads/)?#'),
 										'url' => new Constraints\Regex('/^https?:\/\/.+$/')
 									]
 								])
