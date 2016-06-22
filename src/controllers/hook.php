@@ -125,7 +125,10 @@ class hook
 				'ref' => new Constraints\Regex('#^refs/heads/#'),
 				'after' => new Constraints\Regex('/^[0-9a-f]+$/'),
 				'repository' => new Constraints\Collection([
-					'url' => new Constraints\Regex('/^https?:\/\/.+$/')
+					'allowExtraFields' => true,
+					'fields' => [
+						'url' => new Constraints\Regex('/^https?:\/\/.+$/')
+					]
 				])
 			]
 		]);
