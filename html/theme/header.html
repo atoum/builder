@@ -49,7 +49,11 @@ sub   4096R/BBF10383 2016-06-22</pre>
     <script>
         var debounce;
 
-        document.querySelector('input').onkeyup = function() {
+        document.querySelector('input').onkeyup = function(event) {
+            if (event.keyCode === 27) {
+                document.querySelector('input').value = '';
+            }
+
             if (debounce) {
                 clearTimeout(debounce);
             }
