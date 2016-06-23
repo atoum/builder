@@ -10,6 +10,8 @@
 * {
 	margin:0;
 	padding:0;
+	outline:0;
+	border:0;
 	-webkit-box-sizing:border-box;
 	   -moz-box-sizing:border-box;
 	       box-sizing: border-box; 
@@ -17,120 +19,83 @@
 
 html {
 	min-height:100%;
-	border-bottom:10px solid #ECEEF1;
-	color:#61666c;
+	color:#888;
 	font-weight:400;
-	font-size:1em;
+	font-size:16px;
 	font-family:'Open Sans', sans-serif;
 	line-height:2em;
-
+	border-bottom:10px solid #f5f5f5;
 }
 body {
 	-webkit-backface-visibility:hidden;
 }
 header {
 	height: 100px;
-	background-color: #ECEEF1;
+	background-color: #f5f5f5;
 	background-image: url("logo-die-cut.png");
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;
 }
+footer {
+	text-align:center;
+	font-size:.75em;
+}
 code {
 	font-family:consolas,monospace;	
 }
 a {
-	color:#61666c;
+	color:#4078c0;
 	text-decoration:none;
 }
-a, img {
-        border:none;
-        outline:none
-}
 a:hover {
-	color:#2a2a2a;
+	text-decoration: underline;
 }
-/*------------------------------------*\
-    Wrapper
-\*------------------------------------*/
+p {
+	margin-bottom: 1em;
+}
 .wrapper {
 	padding:20px;
 	margin:0 auto;
-}
-/*------------------------------------*\
-    Demo block
-\*------------------------------------*/
-.block {
-	font-size:.875em;
-	margin:20px 0;
-	padding:20px;
-	color:#9099A3;
 }
 /*------------------------------------*\
     Table (directory listing)
 \*------------------------------------*/
 table {
 	width:100%;
-	border-collapse:collapse;
-	font-size:.875em;
+	border:1px solid #eee;
+	border-radius: 3px;
+	border-spacing: 0;
 }
-tr {
-	outline:0;
-	border:0;
+tr:first-of-type {
+	background-color: #f8f8f8;
+	border: 1px solid #eee;
+}
+th, td {
+	text-align:left;
+	padding: .5em;
+	font-size: .8em;
+}
+th a {
+	color: #333;
+}
+.indexcolicon {
+	width: 16px;
+}
+.indexcolname {
+	width: 65%;
+}
+.indexcolsize {
+	width: 5%;
 }
 tr:hover td {
-	background:#f6f6f6;
-}
-th {
-	text-align:left;
-	font-size:.75em;
-	padding-right:20px;
-}
-/* 2nd Column: Filename */
-th + th {
-	width:65%;
-}
-/* 3rd Column: Last Modified */
-th + th + th {
-}
-/* 4th Column: Size */
-th + th + th + th {
-	width:5%;
-}
-tr td:first-of-type {
-	padding-left:10px;
-	padding-right:10px;
+	background:#f5f5f5;
 }
 td {
-	padding:5px 0;
-	outline:0;
-	border:0;
-	border-bottom:1px solid #edf1f5;
+	border-top:1px solid #eee;
 	vertical-align:middle;
-	text-align:left;
-	-webkit-transition:background 300ms ease;
-	   -moz-transition:background 300ms ease;
-	    -ms-transition:background 300ms ease;
-	     -o-transition:background 300ms ease;
-	        transition:background 300ms ease;
+	color: #888;
 }
-td a{
-	display: block;
-}
-tr.parent a[href^="/"] {
-	color:#9099A3;
-}
-	.parent a[href^="/"]:hover {
-		color:#2281d0;
-	}
-/*------------------------------------*\
-    Footer
-\*------------------------------------*/
-.footer {
-	text-align:center;
-	font-size:.75em;
-}
-
 /*------------------------------------*\
     Buttons
 \*------------------------------------*/
@@ -217,10 +182,6 @@ tr.parent a[href^="/"] {
 
 .alert:target .alert-heading {
 	margin-bottom: .65em;
-}
-
-.alert p {
-	margin-bottom: 0em;
 }
 
 .alert code {

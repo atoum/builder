@@ -2,12 +2,13 @@
     Options +Indexes
 
     IndexOptions +Charset=UTF-8 +FancyIndexing +IgnoreCase +FoldersFirst +XHTML +HTMLTable +SuppressRules +SuppressDescription +NameWidth=* +IconsAreLinks
-    IndexHeadInsert "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />"
+    IndexHeadInsert "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" /><script>document.getElementsByTagName('title')[0].textContent = 'atoum PHARs repository';</script>"
     IndexStyleSheet ../theme/style.css
     IndexIgnore ..
 
     HeaderName ../theme/header.html
-    
+    ReadmeName ../theme/footer.html
+
     AddIconByType (TXT,../theme/icons/text.png) text/*
     AddIconByType (IMG,../theme/icons/image.png) image/*
     AddIconByType (SND,../theme/icons/audio.png) audio/*
