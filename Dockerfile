@@ -17,9 +17,9 @@ RUN wget -O /opt/composer https://getcomposer.org/composer.phar && \
 
 ADD ./composer.json /var/www/composer.json
 ADD ./composer.lock /var/www/composer.lock
+ADD ./src /var/www/src
 
 RUN /opt/composer install --prefer-dist --classmap-authoritative --no-dev
 
-ADD ./src /var/www/src
 ADD ./bin /var/www/bin
 ADD ./html /var/www/html

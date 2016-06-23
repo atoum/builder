@@ -21,6 +21,7 @@ worker:
         ATOUM_BUILDER_REDIS_PORT: 6379
         ATOUM_BUILDER_RESQUE_QUEUE: atoum
         ATOUM_BUILDER_PHAR_DIRECTORY: /data
+        ATOUM_BUILDER_PUBLIC_URL: http://localhost:8087
     links:
         - redis:redis
     volumes:

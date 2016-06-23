@@ -5,6 +5,7 @@ namespace atoum\builder;
 use atoum\builder\controllers\error;
 use atoum\builder\controllers\hook;
 use atoum\builder\filesystem\sandbox;
+use atoum\builder\providers\github;
 use atoum\builder\providers\log;
 use atoum\builder\providers\resque;
 use JDesrosiers\Silex\Provider\SwaggerServiceProvider;
@@ -49,6 +50,7 @@ class application extends Silex\Application
 			->register(new log())
 			->register(new resque())
 			->register(new ConsoleServiceProvider())
+			->register(new github())
 		;
 
 		$this['sandbox'] = function() {
@@ -60,7 +62,7 @@ class application extends Silex\Application
 
 	public function run(Request $request = null)
 	{
-		$this->get('/', function() { return new RedirectResponse('/phar'); });
+		$this->get('/', function() { $this['github']; return new RedirectResponse('/phar'); });
 		$this->post('/hook/push/{token}', new hook\push($this['auth_token'], $this['broker'], $this['validator'], $this['logger']));
 		$this->post('/hook/pr/{token}', new hook\pr($this['auth_token'], $this['broker'], $this['validator'], $this['logger']));
 		$this->error(new error());

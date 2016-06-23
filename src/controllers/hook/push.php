@@ -16,18 +16,31 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @SWG\Model(
+ *     id="Owner",
+ *     required="name",
+ *     @SWG\Property(name="name", type="string", description="Owner name")
+ * )
+ *
+ * @SWG\Model(
  *     id="Repository",
- *     required="url",
- *     @SWG\Property(name="url", type="string", description="Repository HTTP URL")
+ *     required="url, name",
+ *     @SWG\Property(name="name", type="string", description="Repository name"),
+ *     @SWG\Property(name="url", type="string", description="Repository HTTP URL"),
+ *     @SWG\Property(name="owner", type="Owner", description="Repository owner")
  * )
  *
  * @SWG\Model(
  *     id="PushEvent",
- *     required="ref, repository",
+ *     required="ref, head, repository",
  *     @SWG\Property(
  *         name="ref",
  *         type="string",
  *         description="Git reference"
+ *     ),
+ *     @SWG\Property(
+ *         name="head",
+ *         type="string",
+ *         description="Git head SHA1"
  *     ),
  *     @SWG\Property(
  *         name="repository",
@@ -127,10 +140,18 @@ class push
 			'allowExtraFields' => true,
 			'fields' => [
 				'ref' => new Constraints\Regex('#^refs/heads/#'),
+				'head' => new Constraints\Regex('#^[0-9a-f]#i'),
 				'repository' => new Constraints\Collection([
 					'allowExtraFields' => true,
 					'fields' => [
-						'url' => new Constraints\Regex('/^https?:\/\/.+$/')
+						'name' =>  new Constraints\NotBlank(),
+						'url' => new Constraints\Regex('/^https?:\/\/.+$/'),
+						'owner' => new Constraints\Collection([
+							'allowExtraFields' => true,
+							'fields' => [
+								'name' =>  new Constraints\NotBlank()
+							]
+						])
 					]
 				])
 			]

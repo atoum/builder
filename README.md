@@ -42,6 +42,9 @@ The telemtry platform is configured through environment variables:
 | `ATOUM_BUILDER_REDIS_HOST`        | Redis host name                        | `localhost` | X   | X      |
 | `ATOUM_BUILDER_REDIS_PORT`        | Redis port                             | `6379`      | X   | X      |
 | `ATOUM_BUILDER_RESQUE_QUEUE`      | Resque queue name                      | `atoum`     | X   | X      |
+| `ATOUM_BUILDER_GPG_URL`           | URL used to download the GPG key       | `null`      |     | X      |
+| `ATOUM_BUILDER_GITHUB_TOKEN`      | Github API access token                | `null`      |     | X      |
+| `ATOUM_BUILDER_PUBLIC_URL`        | Public URL                             | `null`      |     | X      |
 
 ## Running
 

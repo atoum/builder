@@ -54,6 +54,10 @@ a:hover {
 p {
 	margin-bottom: 1em;
 }
+abbr {
+	border-bottom: 1px dashed;
+	cursor: help;
+}
 .wrapper {
 	padding:20px;
 	margin:0 auto;

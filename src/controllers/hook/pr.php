@@ -16,22 +16,44 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @SWG\Model(
- *     id="Repo",
- *     required="clone_url",
- *     @SWG\Property(name="clone_url", type="string", description="Repository HTTP URL")
+ *     id="RepoOwner",
+ *     required="login",
+ *     @SWG\Property(name="login", type="string", description="Owner name")
+ * )
+ *
+ * @SWG\Model(
+ *     id="BaseRepo",
+ *     required="name, owner",
+ *     @SWG\Property(name="name", type="string", description="Repository name"),
+ *     @SWG\Property(name="owner", type="RepoOwner", description="Repository owner")
+ * )
+ *
+ * @SWG\Model(
+ *     id="HeadRepo",
+ *     required="clone_url, name, owner",
+ *     @SWG\Property(name="clone_url", type="string", description="Repository HTTP URL"),
+ *     @SWG\Property(name="owner", type="RepoOwner", description="Repository owner")
+ * )
+ *
+ * @SWG\Model(
+ *     id="Base",
+ *     required="repo",
+ *     @SWG\Property(name="repo", type="BaseRepo", description="Pull request head repository")
  * )
  *
  * @SWG\Model(
  *     id="Head",
- *     required="ref, repo",
- *     @SWG\Property(name="ref", type="string", description="Git reference")
- *     @SWG\Property(name="repo", type="Repo", description="Pull request repository")
+ *     required="ref, sha, repo",
+ *     @SWG\Property(name="ref", type="string", description="Git reference"),
+ *     @SWG\Property(name="sha", type="string", description="Git head SHA1"),
+ *     @SWG\Property(name="repo", type="HeadRepo", description="Pull request head repository")
  * )
  *
  * @SWG\Model(
  *     id="PullRequest",
- *     required="head",
- *     @SWG\Property(name="head", type="Head", description="Pull request head")
+ *     required="head, base",
+ *     @SWG\Property(name="head", type="Head", description="Pull request head"),
+ *     @SWG\Property(name="base", type="Base", description="Pull request base repository")
  * )
  *
  * @SWG\Model(
@@ -161,10 +183,28 @@ class pr
 							'allowExtraFields' => true,
 							'fields' => [
 								'ref' => new Constraints\Regex('#^(?:refs/heads/)?#'),
+								'sha' => new Constraints\Regex('#^[0-9a-f]#i'),
 								'repo' => new Constraints\Collection([
 									'allowExtraFields' => true,
 									'fields' => [
 										'clone_url' => new Constraints\Regex('/^https?:\/\/.+$/')
+									]
+								])
+							]
+						]),
+						'base' => new Constraints\Collection([
+							'allowExtraFields' => true,
+							'fields' => [
+								'repo' => new Constraints\Collection([
+									'allowExtraFields' => true,
+									'fields' => [
+										'name' => new Constraints\NotBlank(),
+										'owner' => new Constraints\Collection([
+											'allowExtraFields' => true,
+											'fields' => [
+												'login' =>  new Constraints\NotBlank()
+											]
+										])
 									]
 								])
 							]
