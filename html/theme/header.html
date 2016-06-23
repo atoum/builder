@@ -23,7 +23,7 @@ gpg:               imported: 1  (RSA: 1)</pre>
 
             <p>The key is now available on your machine: you should be able to verify the phar:</p>
 
-            <pre>$ <strong>gpg atoum-dev-master-033f5eea0.phar.asc</strong>
+            <pre>$ <strong>gpg --verify atoum-dev-master-033f5eea0.phar.asc atoum-dev-master-033f5eea0.phar</strong>
 gpg: assuming signed data in `html/phar/atoum-pr604-edition_configuration-0ee9f3229.phar'
 gpg: Signature made Wed Jun 22 12:54:47 2016 UTC using RSA key ID 60AF5C01
 gpg: <strong>Good signature from "atoum org &lt;team@atoum.org&gt;"</strong>
@@ -33,8 +33,14 @@ Primary key fingerprint: <strong>6CEE 3798 FB8E EB57 98D5  2A81 503D EFD1 60AF 5
 
             <p>
                 At this point you have successfully verified that the signature is good. <strong>But you should also see a warning:</strong> this is expected.
-                It tells you to double-check the fingerprint of the key use to generate the signature. If you get <a href="https://pgp.mit.edu/pks/lookup?search=atoum+org&op=vindex&fingerprint=on&exact=on"><code>6CEE 3798 FB8E EB57 98D5  2A81 503D EFD1 60AF 5C01</code></a> you are good.
+                It tells you to double-check the fingerprint of the key use to generate the signature. If you get <a href="https://pgp.mit.edu/pks/lookup?search=atoum+org&op=vindex&fingerprint=on&exact=on"><code>6CEE 3798 FB8E EB57 98D5  2A81 503D EFD1 60AF 5C01</code></a> you are good:
             </p>
+
+            <pre>$ <strong>gpg --fingerprint 6CEE3798FB8EEB5798D52A81503DEFD160AF5C01</strong>
+pub   4096R/60AF5C01 2016-06-22
+      Key fingerprint = 6CEE 3798 FB8E EB57 98D5  2A81 503D EFD1 60AF 5C01
+uid                  atoum org &lt;team@atoum.org&gt;
+sub   4096R/BBF10383 2016-06-22</pre>
         </div>
     </div>
 
@@ -53,13 +59,11 @@ Primary key fingerprint: <strong>6CEE 3798 FB8E EB57 98D5  2A81 503D EFD1 60AF 5
                     var value = document.querySelector('input').value;
 
                     document.querySelectorAll('tr:not(.indexhead)').forEach(function(tr) {
-                        console.log(tr.textContent.indexOf(value));
-                        if (tr.textContent.indexOf(value) > -1) {
+                        if (tr.textContent.indexOf(value) > -1 || value === '') {
                             tr.style.display = '';
                         }  else {
                             tr.style.display = 'none';
                         }
-                        console.log(tr.style);
                     });
                 },
                 50
