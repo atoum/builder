@@ -48,6 +48,7 @@ class phar
         $gpg
             ->add('--armor')
             ->add('--detach-sign')
+            ->add('--yes')
             ->add($this->path)
             ->getProcess()
                 ->mustRun(function($_, $buffer) { echo $buffer; })
