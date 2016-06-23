@@ -15,10 +15,11 @@ RUN docker-php-ext-install opcache && \
 RUN wget -O /opt/composer https://getcomposer.org/composer.phar && \
     chmod +x /opt/composer
 
-ADD ./src /var/www/src
-ADD ./bin /var/www/bin
-ADD ./html /var/www/html
 ADD ./composer.json /var/www/composer.json
 ADD ./composer.lock /var/www/composer.lock
 
 RUN /opt/composer install --prefer-dist --classmap-authoritative --no-dev
+
+ADD ./src /var/www/src
+ADD ./bin /var/www/bin
+ADD ./html /var/www/html
