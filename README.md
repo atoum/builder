@@ -1,6 +1,6 @@
 # atoum builder [![Build Status](https://travis-ci.org/atoum/builder.svg?branch=master)](https://travis-ci.org/atoum/builder)
 
-![atoum](http://downloads.atoum.org/images/logo.png)
+![atoum](http://atoum.org/images/logo/atoum.png)
 
 ## Running locally
 
